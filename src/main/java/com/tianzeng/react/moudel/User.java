@@ -1,10 +1,6 @@
 package com.tianzeng.react.moudel;
 
-import org.hibernate.annotations.*;
-
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
@@ -21,8 +17,7 @@ public class User implements Serializable {
     @Column
     private String password;
 
-    @OneToOne
-    @Cascade({org.hibernate.annotations.CascadeType.DELETE})
+    @OneToOne(cascade = CascadeType.REMOVE)
     private StaffDataMoudel staffDataMoudel;
 
     public StaffDataMoudel getStaffDataMoudel() {
