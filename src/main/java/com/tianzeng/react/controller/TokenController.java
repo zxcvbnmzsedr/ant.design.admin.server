@@ -26,14 +26,10 @@ public class TokenController {
 
     @RequestMapping (method = RequestMethod.POST)
     public Result login (@RequestParam String username, @RequestParam String password,String token) throws MyException {
-        Result result = new Result();
         Assert.notEmpty(username,"用户名不能为空");
         Assert.notEmpty(password,"用户密码不能为空");
-
-
         User user = userService.findByName(username,password);
         Assert.notEmpty(user,"用户尚未注册");
-
         if(!user.getPassword().equals(password)){
             Assert.throwException("密码错误");
         }
