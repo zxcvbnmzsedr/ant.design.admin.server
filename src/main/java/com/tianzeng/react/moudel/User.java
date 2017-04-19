@@ -1,54 +1,28 @@
 package com.tianzeng.react.moudel;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.util.Collection;
 
 /**
- * Created by tianzeng on 2017-03-16.
+ * Created by tianzeng on 17-4-19.
  */
+@Data
 @Entity
-@Table(name = "user")
-public class User implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class User{
+    private @Id @GeneratedValue Long id;
 
-    @Id
-    private String username;
+    private String name;
 
-    @Column
-    private String password;
+    private @JsonIgnore String password;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
-    private StaffDataMoudel staffDataMoudel;
+    private String[] roles;
 
-    public StaffDataMoudel getStaffDataMoudel() {
-        return staffDataMoudel;
-    }
+    private Boolean enabled;
 
-    public void setStaffDataMoudel(StaffDataMoudel staffDataMoudel) {
-        this.staffDataMoudel = staffDataMoudel;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
 }

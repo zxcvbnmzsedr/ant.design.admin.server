@@ -64,7 +64,7 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
         <!--activiti-->
-        <dependency>
+ <!--       <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>spring-boot-starter-basic</artifactId>
             <version>RELEASE</version>
@@ -73,7 +73,7 @@
             <groupId>org.activiti</groupId>
             <artifactId>spring-boot-starter-rest-api</artifactId>
             <version>RELEASE</version>
-        </dependency>
+        </dependency>-->
         <!--Test-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -98,6 +98,26 @@
             <version>1.4.2.RELEASE</version>
             <scope>test</scope>
         </dependency>
+        <!--spring-security-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-rest-webmvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <!--redis-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-redis</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
     </dependencies>
 
 </project>

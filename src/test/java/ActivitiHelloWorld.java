@@ -1,12 +1,12 @@
 import com.tianzeng.react.SampleController;
-import org.activiti.engine.*;
+/*import org.activiti.engine.*;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.activiti.image.ProcessDiagramGenerator;
 import org.activiti.image.impl.DefaultProcessDiagramGenerator;
-import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FileUtils;*/
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ import java.util.List;
 @WebAppConfiguration
 @IntegrationTest
 public class ActivitiHelloWorld {
-    @Autowired
+   /* @Autowired
     private RuntimeService runtimeService;
 
     @Autowired
@@ -40,9 +40,9 @@ public class ActivitiHelloWorld {
     @Autowired
     private RepositoryService repositoryService;
 
-    /**
+    *//**
      * 部署流程定义
-     */
+     *//*
     @Test
     public void deployWorkFlowDefinition(){
         ProcessEngine processEngine =  ProcessEngines.getDefaultProcessEngine();
@@ -55,9 +55,9 @@ public class ActivitiHelloWorld {
         System.out.println("部署名:"+deployment.getName());
     }
 
-    /**
+    *//**
      * 启动流程实例
-     */
+     *//*
     @Test
     public void startProcessInstance(){
         String key = "helloworld";
@@ -65,9 +65,9 @@ public class ActivitiHelloWorld {
         System.out.println("启动流程实例ID: "+pi.getId());
         System.out.println("流程定义IDID: "+pi.getProcessDefinitionId());
     }
-    /**
+    *//**
      * 查询个人当前任务
-     */
+     *//*
     @Test
     public void findMyPersonTask(){
         String zhangsan = "张三";
@@ -118,17 +118,17 @@ public class ActivitiHelloWorld {
 
     }
 
-    /**
+    *//**
      * 完成我的任务
-     */
+     *//*
     @Test
     public void completeMyPersonalTask(){
         String taskId = "7502";
         taskService.complete(taskId);
     }
-    /**
+    *//**
      * 查询流程定义
-     */
+     *//*
     @Test
     public void findProcessDefinition(){
         List<ProcessDefinition> list = repositoryService.createProcessDefinitionQuery().list();
@@ -145,18 +145,18 @@ public class ActivitiHelloWorld {
         }
     }
 
-    /**
+    *//**
      * 删除流程定义
-     */
+     *//*
     @Test
     public void deleteProcessDefinition(){
         String deploymentId = "12501";
         repositoryService.deleteDeployment(deploymentId,true);
     }
 
-    /**
+    *//**
      * 查看流程图片
-     */
+     *//*
     @Test
     public void viewPic(){
         String deploymentId = "20001";
@@ -175,6 +175,7 @@ public class ActivitiHelloWorld {
             FileUtils.copyInputStreamToFile(in ,file);
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
+        }*/
+//    }
+
 }

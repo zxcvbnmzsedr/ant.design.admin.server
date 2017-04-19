@@ -15,6 +15,12 @@ public class Result {
         this.success = success;
     }
 
+    public Result(boolean success,String message,  Object obj) {
+        this.message = message;
+        this.success = success;
+        this.obj = obj;
+    }
+
     public Result() {
     }
 
