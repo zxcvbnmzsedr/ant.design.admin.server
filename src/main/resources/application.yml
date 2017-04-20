@@ -1,0 +1,33 @@
+spring:
+    profiles:
+        active: dev
+    datasource:
+        driver-class-name: com.mysql.jdbc.Driver
+        password: root
+        url: jdbc:mysql://localhost:3306/react?useUnicode=true&characterEncoding=utf-8&useSSL=true&autoReconnect=true
+        username: user
+    h2:
+        console:
+            enabled: true
+    jpa:
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL5Dialect
+                hbm2ddl:
+                    auto: update
+    redis:
+        database: 0
+        host: localhost
+        password: 123456
+        pool:
+            max-active: 8
+            max-idle: 8
+            max-wait: -1
+            min-i: dle=0
+        port: 6379
+        timeout: 0
+#    data:
+#      rest:
+#        base-path: /api
+
+

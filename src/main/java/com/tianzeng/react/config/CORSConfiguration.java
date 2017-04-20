@@ -1,7 +1,6 @@
 package com.tianzeng.react.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -10,7 +9,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * Created by tianzeng on 2017-03-09.
  * 配置跨域请求
  */
-@Configuration
 public class CORSConfiguration {
     @Bean
     public WebMvcConfigurer corsConfigurer() {

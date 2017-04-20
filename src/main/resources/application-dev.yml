@@ -1,0 +1,43 @@
+# dev env
+server:
+  port: 8090
+
+# Thymeleaf view template config
+# disable cache for dev
+spring:
+  thymeleaf:
+    cache: false
+# message resource config
+# if true use system local and false to use baseName (e.g. 'messages')
+  messages:
+      fallback-to-system-locale: false
+
+# basic security
+security:
+  oauth2:
+    client:
+      client-id: client
+      client-secret: secret
+      scope: read,write
+      auto-approve-scopes: '.*'
+      grant-type: password
+  basic:
+    enabled: false
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+github:
+  client:
+    clientId: b941d25525ec46da526b
+    clientSecret: 37587feee99a6547c6166806c84b05d0e666cb8e
+    accessTokenUri: https://github.com/login/oauth/access_token
+    userAuthorizationUri: https://github.com/login/oauth/authorize
+    authenticationScheme: query
+    clientAuthenticationScheme: form
+#    pre-established-redirect-uri: http://localhost:8090/login/github
+#    registered-redirect-uri: http://localhost:8090/login/github
+#    use-current-uri: false
+  resource:
+    userInfoUri: https://api.github.com/user
