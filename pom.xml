@@ -80,11 +80,6 @@
             <version>1.4.2.RELEASE</version>
             <scope>test</scope>
         </dependency>
-        <!--spring-security-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-rest-webmvc</artifactId>
@@ -99,14 +94,9 @@
             <artifactId>spring-boot-starter-redis</artifactId>
             <version>RELEASE</version>
         </dependency>
-        <!--spring outh2-->
-        <dependency>
-            <groupId>org.springframework.security.oauth</groupId>
-            <artifactId>spring-security-oauth2</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
     </dependencies>
 
