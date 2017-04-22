@@ -22,8 +22,8 @@ import java.lang.reflect.Method;
 /**
  * Created by tianzeng on 17-4-19.
  */
-@Configuration
-@EnableCaching
+//@Configuration
+//@EnableCaching
 public class RedisConfig extends CachingConfigurerSupport {
     @Bean
     public KeyGenerator keyGenerator() {

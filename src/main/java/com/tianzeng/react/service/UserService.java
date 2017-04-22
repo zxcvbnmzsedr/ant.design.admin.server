@@ -40,7 +40,9 @@ public class UserService{
         return userRepository.findOne(id);
     }
 
-
+    public User findByUsername(String userName){
+        return userRepository.findByUsername(userName);
+    }
 
     public List<User> findAll() {
         return userRepository.findAll();
