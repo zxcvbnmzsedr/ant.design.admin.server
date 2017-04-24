@@ -4,9 +4,9 @@ package com.tianzeng.react.enums;
  * Created by tianzeng on 17-4-22.
  */
 public enum SourcePermissions {
-    BROWSE("BROWSE"),
-    CREATE("CREATE"),
-    UPDATE("UPDATE"),
+    BROWSE("GET"),
+    CREATE("POST"),
+    UPDATE("PUT"),
     DELETE("DELETE");
 
     private String code;

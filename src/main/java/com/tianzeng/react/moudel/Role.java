@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -26,8 +27,8 @@ public class Role {
 
     private String description; //角色描述
     @ManyToMany(mappedBy = "roles")
-    private Set<User> users = new HashSet<>();
+    private List<User> users;
 
-    @OneToMany
-    private Set<Permission> permissions = new HashSet<>(); // 角色所拥有的权限
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Permission> permissions; // 角色所拥有的权限
 }

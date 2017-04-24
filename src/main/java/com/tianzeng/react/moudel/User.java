@@ -6,10 +6,7 @@ import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by kaenry on 2016/6/17.
@@ -28,7 +25,13 @@ public class User{
 
     private String password;
 
-    @ManyToMany
-    private Set<Role> roles = new HashSet<>();
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Role> roles;
+
+
+
+
+
+
 
 }
