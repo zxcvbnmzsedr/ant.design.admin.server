@@ -10,6 +10,7 @@ public class Result {
     private String message;
     private boolean success;
     private Object obj;
+    private Integer code;
     public Result(boolean success,String message) {
         this.message = message;
         this.success = success;
@@ -22,6 +23,14 @@ public class Result {
     }
 
     public Result() {
+    }
+
+    public Result(int i, boolean success,String message,  Object obj) {
+        this.code = i;
+        this.message = message;
+        this.success = success;
+        this.obj = obj;
+
     }
 
     public Object getObj() {
@@ -46,5 +55,13 @@ public class Result {
 
     public void setSuccess(boolean success) {
         this.success = success;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
     }
 }

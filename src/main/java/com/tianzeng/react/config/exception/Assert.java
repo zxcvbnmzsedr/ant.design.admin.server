@@ -11,7 +11,7 @@ import java.util.Map;
  * Created by tianzeng on 17-4-19.
  */
 public class Assert {
-    public static void notNull(Object object, String message) throws MyException {
+    public static void notNull(Object object, String message){
         if(object == null) {
             throw new MyException(message);
         }

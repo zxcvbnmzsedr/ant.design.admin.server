@@ -18,7 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class Role {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long roleId;
 
     private String name;
@@ -29,6 +29,6 @@ public class Role {
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Permission> permissions; // 角色所拥有的权限
 }

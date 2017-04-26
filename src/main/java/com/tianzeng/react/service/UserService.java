@@ -24,15 +24,15 @@ public class UserService{
     @Autowired
     private UserRepository userRepository;
 
-    public User save(User entity) throws Exception {
+    public User save(User entity){
         return userRepository.save(entity);
     }
 
-    public void delete(Long id) throws Exception {
+    public void delete(Long id){
         userRepository.delete(id);
     }
 
-    public void delete(User entity) throws Exception {
+    public void delete(User entity){
         userRepository.delete(entity);
     }
 
