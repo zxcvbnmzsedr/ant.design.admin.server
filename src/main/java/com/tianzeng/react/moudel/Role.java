@@ -29,6 +29,9 @@ public class Role {
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY,cascade=CascadeType.REMOVE)
     private List<Permission> permissions; // 角色所拥有的权限
+
+    @Transient
+    private List<String> permission;  // 用于接受前台传来的权限字符
 }

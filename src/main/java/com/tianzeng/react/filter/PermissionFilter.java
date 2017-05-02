@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 /**
  * Created by tianzeng on 17-4-22.
  */
-@WebFilter(filterName = "permissionFilter", urlPatterns = "/*")
+//@WebFilter(filterName = "permissionFilter", urlPatterns = "/*")
 public class PermissionFilter implements Filter{
     @Autowired
     private TokenService tokenService;

@@ -22,4 +22,12 @@ public class SourceService {
     public List<Source> findAll(){
         return sourceRepository.findAll();
     }
+
+    public void delete(Long id){
+        sourceRepository.delete(id);
+    }
+
+    public Source findOne(Long id) {
+        return sourceRepository.findOne(id);
+    }
 }

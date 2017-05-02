@@ -28,8 +28,7 @@ public class Source {
 
     private String description; // 资源描述
 
-    @OneToMany(mappedBy = "source",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-//    @JsonIgnore
+    @OneToMany(mappedBy = "source",fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
     private List<Permission> permissions;
 
 }

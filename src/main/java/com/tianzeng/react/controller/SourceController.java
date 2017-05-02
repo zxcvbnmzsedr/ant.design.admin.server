@@ -13,9 +13,8 @@ import com.tianzeng.react.moudel.Source;
 import com.tianzeng.react.service.SourceService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,10 +33,24 @@ public class SourceController {
     public Result sources(){
         Result result = new Result();
         List<Source> sourceList = sourceService.findAll();
-        SimplePropertyPreFilter filter = new SimplePropertyPreFilter(Permission.class, "permissions","description");
+        SimplePropertyPreFilter filter = new SimplePropertyPreFilter(Permission.class, "id","permissions","description");
         Assert.notNull(sourceList,"资源列表为空");
         logger.info(JSON.toJSONString(sourceList,filter));
         result.setObj(JSONObject.parse(JSON.toJSONString(sourceList,filter)));
         return result;
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable("id") String id){
+        if(id.contains(",")){
+            String s = id.split(",")[0];
+            Permission permission = new Permission();
+            permission.setId(Long.valueOf(s));
+            permissionRepository.save(permission);
+        }else {
+            sourceService.delete(Long.valueOf(id));
+        }
+    }
+
 }
