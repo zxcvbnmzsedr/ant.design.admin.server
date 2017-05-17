@@ -15,25 +15,37 @@ import java.util.*;
 @Entity
 @Data
 @DynamicUpdate
+@Table(name = "sec_user")
 public class User{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long userId;
+    private Long id;
 
     private String username;
 
+    private String providerName;
+
+    private String email;
+
+    private String mobile;
+
     private String password;
 
-    private String rolesDescribe;
+    private String avatarUrl;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Role> roles;
+    private String firstName;
 
+    private String lastName;
 
+    private String fullName;
 
+    private Date createdAt;
 
+    private Date updatedAt;
 
+    private Date deletedAt;
 
-
+    @OneToMany
+    private Set<Role> roles;
 }

@@ -16,13 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = MyException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<?> jsonErrorHandler(HttpServletRequest req, MyException e) throws Exception {
-        ErrorInfo<String> r = new ErrorInfo<String>();
+        ErrorInfo<String> r = new ErrorInfo<>();
         r.setMessage(e.getMessage());
-        r.setCode(ErrorInfo.ERROR);
-        r.setData("Some Data");
         r.setUrl(req.getRequestURL().toString());
-        return new ResponseEntity<>(r, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(r, e.getHttpStatus());
     }
 }

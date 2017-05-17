@@ -1,59 +1,59 @@
 package com.tianzeng.react.service;
 
-
+import com.tianzeng.react.common.Config;
+import com.tianzeng.react.config.exception.Assert;
 import com.tianzeng.react.dao.UserRepository;
+import com.tianzeng.react.moudel.Permission;
+import com.tianzeng.react.moudel.Role;
 import com.tianzeng.react.moudel.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
-import javax.persistence.criteria.Predicate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 /**
- * Created by kaenry on 2016/6/17.
- * UserService
+ * Created by tianzeng on 2017/5/17.
  */
 @Service
-public class UserService{
-
+public class UserService {
     @Autowired
     private UserRepository userRepository;
-
-    public User save(User entity){
-        return userRepository.save(entity);
+    @Autowired
+    private RedisTemplate redisTemplate;
+    /**
+     * 当前api需要的权限值
+     * @param method       method
+     * @param requestURI
+     * @return value
+     */
+    public void check(long userId,String token, String method, String requestURI){
+        User user = userRepository.findOne(userId);
+        if(!redisTemplate.boundValueOps (String.valueOf(user.getId())).get().equals(token)){
+            Assert.throwException("验证失败");
+        }
+        boolean hasPerssion = false;
+        Set<Role> roleSet = user.getRoles();
+        for(Role role:roleSet){
+            Set<Permission> permissions = role.getPermissions();
+            for (Permission permission:permissions){
+                // 先匹配URL
+                if(requestURI.startsWith(permission.getUrl())){
+                    // 再匹配是否拥有权限
+                    if(permission.getMethod().equals("*")||permission.getMethod().contains(method)){
+                        // 拥有权限
+                        hasPerssion = true;
+                    }
+                }
+            }
+        }
+        for (String url:Config.URUSET) {
+            if(url.startsWith(requestURI)){
+                hasPerssion = true;
+            }
+        }
+        if(!hasPerssion){
+            Assert.throwException("没有权限");
+        }
     }
-
-    public void delete(Long id){
-        userRepository.delete(id);
-    }
-
-    public void delete(User entity){
-        userRepository.delete(entity);
-    }
-
-    public User findById(Long id) {
-        return userRepository.findOne(id);
-    }
-
-    public User findByUsername(String userName){
-        return userRepository.findByUsername(userName);
-    }
-
-    public List<User> findAll() {
-        return userRepository.findAll();
-    }
-
-    public Page<User> findAll(PageRequest pageRequest) {
-        return userRepository.findAll(pageRequest);
-    }
-
-
-
-
-
 }

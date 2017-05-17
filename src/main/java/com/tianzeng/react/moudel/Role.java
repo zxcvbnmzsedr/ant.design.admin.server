@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,22 +17,29 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "sec_role")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long roleId;
+    private Long id;
 
     private String name;
 
-    private String status;// 角色启用状态
+    private String value;
 
-    private String description; //角色描述
-    @ManyToMany(mappedBy = "roles")
-    private List<User> users;
+    private String intro;
 
-    @ManyToMany(fetch = FetchType.LAZY,cascade=CascadeType.REMOVE)
-    private List<Permission> permissions; // 角色所拥有的权限
+    private String pid;
 
-    @Transient
-    private List<String> permission;  // 用于接受前台传来的权限字符
+    private Date createdAt;
+
+    private Date updatedAt;
+
+    private Date deletedAt;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Permission> permissions;
+
+    @OneToMany(mappedBy = "roles")
+    private Set<User> users;
 }
