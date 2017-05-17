@@ -1,5 +1,6 @@
 package com.tianzeng.react.filter;
 
+import com.tianzeng.react.common.Config;
 import com.tianzeng.react.config.exception.Assert;
 import com.tianzeng.react.service.UserService;
 import org.apache.log4j.Logger;
@@ -31,9 +32,15 @@ public class PermissionFilter  implements Filter {
         logger.info("开始检测权限");
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        Assert.notNull(request.getHeader("userId"),"验证参数错误");
-        Assert.notNull(request.getHeader("token"),"验证参数错误");
-        userService.check(Integer.valueOf(request.getHeader("userId").toString()),request.getHeader("token").toString(),request.getMethod(), request.getRequestURI());
+        for (String url: Config.URUSET) {
+            if(url.startsWith(request.getRequestURI())){
+                filterChain.doFilter(servletRequest, servletResponse);
+                return;
+            }
+        }
+        Assert.notNull(request.getHeader("access-token"),"验证参数错误");
+        String[] accessToken = request.getHeader("access-token").split(",");
+        userService.check(Long.parseLong(accessToken[0]),accessToken[1],request.getMethod(), request.getRequestURI());
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

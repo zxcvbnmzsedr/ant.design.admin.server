@@ -11,6 +11,6 @@ public class Config {
     public static Set<String> URUSET;
     static {
         URUSET = new HashSet<>();
-        URUSET.add("/token/**");
+        URUSET.add("/api/v1.0/token/**");
     }
 }

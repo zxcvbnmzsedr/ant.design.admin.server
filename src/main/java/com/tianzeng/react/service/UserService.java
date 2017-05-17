@@ -47,11 +47,7 @@ public class UserService {
                 }
             }
         }
-        for (String url:Config.URUSET) {
-            if(url.startsWith(requestURI)){
-                hasPerssion = true;
-            }
-        }
+
         if(!hasPerssion){
             Assert.throwException("没有权限");
         }

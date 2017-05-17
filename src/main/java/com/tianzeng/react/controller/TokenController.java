@@ -12,19 +12,19 @@ import org.springframework.web.bind.annotation.*;
  * Created by tianzeng on 2017/5/17.
  */
 @RestController
-@RequestMapping("/token")
+@RequestMapping("/api/v1.0/token")
 public class TokenController {
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private TokenService tokenService;
 
-    @PutMapping("/")
+    @PostMapping("/")
     public TokenModel getToken(@RequestBody User user){
         Assert.notEmpty(user.getUsername(),"用户名不能为空");
         Assert.notEmpty(user.getPassword(),"密码不能为空");
         User userResult = userRepository.findByUsername(user.getUsername());
-        Assert.notNull(user,"没有查询到用户名");
+        Assert.notNull(userResult,"没有查询到用户名");
         boolean match;
         match = user.getPassword().equals(userResult.getPassword());
         TokenModel tokenModel = null;
