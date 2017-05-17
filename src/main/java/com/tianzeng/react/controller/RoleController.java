@@ -19,8 +19,8 @@ import java.util.List;
 /**
  * Created by tianzeng on 17-5-2.
  */
-@RestController
-@RequestMapping("/api/roles")
+//@RestController
+//@RequestMapping("/api/roles")
 public class RoleController {
     private Logger logger = Logger.getLogger(getClass());
     @Autowired
