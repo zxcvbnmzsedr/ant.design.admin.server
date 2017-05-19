@@ -1,8 +1,5 @@
-package com.tianzeng.react.moudel;
+package com.tianzeng.react.security;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.tianzeng.react.enums.SourcePermissions;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,15 +15,16 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "sec_source")
 //@JsonIgnoreProperties(value = { "permissions","hibernateLazyInitializer", "handler"})
 public class Source {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name; // 资源的名称
+    private String name; // 资源描述
 
-    private String description; // 资源描述
+    private String httpUrl; // 资源地址
 
     @OneToMany(mappedBy = "source",fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
     private List<Permission> permissions;

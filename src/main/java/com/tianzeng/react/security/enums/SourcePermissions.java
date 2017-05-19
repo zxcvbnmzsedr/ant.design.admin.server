@@ -1,4 +1,4 @@
-package com.tianzeng.react.enums;
+package com.tianzeng.react.security.enums;
 
 /**
  * Created by tianzeng on 17-4-22.

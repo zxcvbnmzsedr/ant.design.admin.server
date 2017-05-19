@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 /**
  * Created by tianzeng on 2017-03-16.
  */
-@Component
 public class Result {
     private String message;
     private boolean success;

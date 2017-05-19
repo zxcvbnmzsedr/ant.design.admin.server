@@ -1,11 +1,9 @@
-package com.tianzeng.react.moudel;
+package com.tianzeng.react.security;
 
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -15,6 +13,7 @@ import java.util.*;
 @Entity
 @Data
 @DynamicUpdate
+@Table(name = "sec_user")
 public class User{
 
     @Id
@@ -25,10 +24,8 @@ public class User{
 
     private String password;
 
-    private String rolesDescribe;
-
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Role> roles;
+    private Set<Role> roles;
 
 
 

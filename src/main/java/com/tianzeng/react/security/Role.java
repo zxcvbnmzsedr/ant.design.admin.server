@@ -1,11 +1,10 @@
-package com.tianzeng.react.moudel;
+package com.tianzeng.react.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,6 +15,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "sec_role")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,8 +30,6 @@ public class Role {
     private List<User> users;
 
     @ManyToMany(fetch = FetchType.LAZY,cascade=CascadeType.REMOVE)
-    private List<Permission> permissions; // 角色所拥有的权限
+    private Set<Permission> permissions; // 角色所拥有的权限
 
-    @Transient
-    private List<String> permission;  // 用于接受前台传来的权限字符
 }

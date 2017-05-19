@@ -1,16 +1,12 @@
-package com.tianzeng.react.moudel;
+package com.tianzeng.react.security;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.tianzeng.react.enums.SourcePermissions;
+import com.tianzeng.react.security.enums.SourcePermissions;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by tianzeng on 17-4-22.
@@ -19,6 +15,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "sec_permission")
 public class Permission {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,7 +30,7 @@ public class Permission {
     private List<Role> roles; // 角色所拥有的权限
 
     @Enumerated(EnumType.STRING)
-    private SourcePermissions permissions; // 一种资源对应有四种权限，分别对这种资源的browse、create、update、delete
+    private SourcePermissions method; // 一种资源对应有四种权限，分别对这种资源的browse、create、update、delete
 
 
 
