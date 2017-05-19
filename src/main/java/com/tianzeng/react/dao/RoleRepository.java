@@ -9,5 +9,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
  */
 @RepositoryRestResource(excerptProjection=Role.class)
 public interface RoleRepository extends JpaRepository<Role,Long>{
-
+    Role findByName(String name);
 }

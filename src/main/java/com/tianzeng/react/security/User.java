@@ -1,5 +1,6 @@
 package com.tianzeng.react.security;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
@@ -22,7 +23,7 @@ public class User{
     private Long userId;
 
     private String username;
-    @JsonIgnore
+    @JsonBackReference
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
