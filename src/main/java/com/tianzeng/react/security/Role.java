@@ -29,7 +29,7 @@ public class Role {
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
 
-    @ManyToMany(fetch = FetchType.LAZY,cascade=CascadeType.REMOVE)
+    @ManyToMany(cascade=CascadeType.ALL)
     private Set<Permission> permissions; // 角色所拥有的权限
 
 }

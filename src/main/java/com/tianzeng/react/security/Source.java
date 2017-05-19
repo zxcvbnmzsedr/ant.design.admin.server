@@ -26,7 +26,4 @@ public class Source {
 
     private String httpUrl; // 资源地址
 
-    @OneToMany(mappedBy = "source",fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
-    private List<Permission> permissions;
-
 }
