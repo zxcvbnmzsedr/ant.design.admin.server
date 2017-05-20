@@ -24,7 +24,7 @@ public class Permission {
 
     private String description; // 权限描述
 
-    @ManyToOne(cascade=CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Source source;//该权限对应的资源，也就是Source的某一条记录的唯一标识
 
     @Enumerated(EnumType.STRING)

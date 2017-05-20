@@ -13,4 +13,6 @@ public class Config {
         URUSET = new HashSet<>();
         URUSET.add("/api/v1.0/token/**");
     }
+    // 权限的数量
+    public static Integer PERSSIONS_NUMBER = 4;
 }
