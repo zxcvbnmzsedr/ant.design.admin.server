@@ -1,11 +1,12 @@
 package com.tianzeng.react.service;
 
-import com.tianzeng.react.common.Config;
+import com.tianzeng.react.security.Permission;
+import com.tianzeng.react.security.Role;
+import com.tianzeng.react.security.User;
+import com.tianzeng.react.security.enums.SourcePermissions;
+import org.springframework.stereotype.Service;
 import com.tianzeng.react.config.exception.Assert;
 import com.tianzeng.react.dao.UserRepository;
-import com.tianzeng.react.moudel.Permission;
-import com.tianzeng.react.moudel.Role;
-import com.tianzeng.react.moudel.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 /**
- * Created by tianzeng on 2017/5/17.
+ * Created by tianzeng on 2017/5/18.
  */
 @Service
 public class UserService {
@@ -29,26 +30,28 @@ public class UserService {
      */
     public void check(long userId,String token, String method, String requestURI){
         User user = userRepository.findOne(userId);
-        if(!redisTemplate.boundValueOps (String.valueOf(user.getId())).get().equals(token)){
+        if(!redisTemplate.boundValueOps (String.valueOf(user.getUserId())).get().equals(token)){
             Assert.throwException("验证失败");
         }
-        boolean hasPerssion = false;
+
+        boolean hasPermission = false;
         Set<Role> roleSet = user.getRoles();
         for(Role role:roleSet){
             Set<Permission> permissions = role.getPermissions();
             for (Permission permission:permissions){
-                // 先匹配URL
-                if(requestURI.startsWith(permission.getUrl())){
-                    // 再匹配是否拥有权限
-                    if(permission.getMethod().equals("*")||permission.getMethod().contains(method)){
-                        // 拥有权限
-                        hasPerssion = true;
+                /*实在不知道URL是怎么匹配的，先截了做个假象 哈哈*/
+                if(permission.getSource().getHttpUrl().endsWith("**")){
+                    String sourceUrl = permission.getSource().getHttpUrl().split("/\\*\\*")[0];
+                    if(requestURI.startsWith(sourceUrl)){
+                        if(permission.getMethod().equals(SourcePermissions.parseCode(method))){
+                            hasPermission = true;
+                        }
                     }
                 }
             }
         }
 
-        if(!hasPerssion){
+        if(!hasPermission){
             Assert.throwException("没有权限");
         }
     }

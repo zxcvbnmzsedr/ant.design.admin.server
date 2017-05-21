@@ -1,5 +1,9 @@
-package com.tianzeng.react.filter;
+package com.tianzeng.react.security.filter;
 
+import org.apache.log4j.Logger;
+
+import javax.servlet.*;
+import java.io.IOException;
 import com.tianzeng.react.common.Config;
 import com.tianzeng.react.config.exception.Assert;
 import com.tianzeng.react.service.UserService;
@@ -11,17 +15,14 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
 /**
- * Created by tianzeng on 2017/5/17.
- * 过滤全部请求
+ * Created by tianzeng on 17-4-22.
  */
 @WebFilter(filterName = "permissionFilter", urlPatterns = "/*")
-public class PermissionFilter  implements Filter {
+public class PermissionFilter implements Filter{
+    private Logger logger = Logger.getLogger(getClass());
     @Autowired
     private UserService userService;
-
-    private Logger logger = Logger.getLogger(getClass());
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -42,7 +43,10 @@ public class PermissionFilter  implements Filter {
         String[] accessToken = request.getHeader("access-token").split(",");
         userService.check(Long.parseLong(accessToken[0]),accessToken[1],request.getMethod(), request.getRequestURI());
         filterChain.doFilter(servletRequest, servletResponse);
+
     }
+
+
 
     @Override
     public void destroy() {

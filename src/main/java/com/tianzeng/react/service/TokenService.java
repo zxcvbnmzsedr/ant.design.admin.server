@@ -1,17 +1,17 @@
 package com.tianzeng.react.service;
 
+import com.tianzeng.react.security.User;
+import org.springframework.stereotype.Service;
 import com.tianzeng.react.config.Constants;
 import com.tianzeng.react.moudel.TokenModel;
-import com.tianzeng.react.moudel.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-
 /**
- * Created by tianzeng on 2017/5/17.
+ * Created by tianzeng on 2017/5/18.
  */
 @Service
 public class TokenService {
@@ -20,8 +20,8 @@ public class TokenService {
 
     public TokenModel createToken( User user){
         String token = UUID.randomUUID().toString().replace ("-", "");
-        TokenModel tokenModel = new TokenModel(user.getId(),token);
-        redisTemplate.boundValueOps(String.valueOf(user.getId())).set (token, Constants.TOKEN_EXPIRES_HOUR, TimeUnit.HOURS);
+        TokenModel tokenModel = new TokenModel(user.getUserId(),token);
+        redisTemplate.boundValueOps(String.valueOf(user.getUserId())).set (token, Constants.TOKEN_EXPIRES_HOUR, TimeUnit.HOURS);
         return tokenModel;
     }
     public boolean checkToken (TokenModel model) {
