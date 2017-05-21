@@ -10,6 +10,8 @@ import com.tianzeng.react.security.enums.SourcePermissions;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.hateoas.Resources;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,7 +34,7 @@ public class SourceController {
     private PermissionRepository permissionRepository;
     @PostMapping("/sources")
     @Transactional
-    public void createSource(@RequestBody Source source){
+    public ResponseEntity<?> createSource(@RequestBody Source source){
         Source result = sourceRepository.save(source);
         // 为资源创建四种权限
         Permission[] permissions = new Permission[Config.PERSSIONS_NUMBER];
@@ -51,7 +53,10 @@ public class SourceController {
 
         permissions[3].setMethod(SourcePermissions.DELETE);
         permissions[3].setDescription(source.getName()+"删除");
-        permissionRepository.save(Arrays.asList(permissions));
+        List<Permission> per = permissionRepository.save(Arrays.asList(permissions));
+        Resources<Permission> resources = new Resources<Permission>(per);
+        return ResponseEntity.ok(resources);
+
     }
 
     @DeleteMapping("/sources/{id}")
